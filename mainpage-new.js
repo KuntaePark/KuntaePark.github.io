@@ -6,6 +6,7 @@ databaseURL: "https://prototype-a5084.firebaseio.com",
 firebase.initializeApp(config);
 var database = firebase.database();
 var categoryRef = database.ref('categories');
+var srchsRef = database.ref('srchs');
 var categoryObject = null;
 var currentCatItem = null;
 var catHistory = [];
@@ -15,6 +16,17 @@ categoryRef.once('value',function(snapshot) {
   console.log(categoryObject)
   renderCategories(categoryObject)
 })
+
+document.getElementById("srch").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      var obj = {
+        ans : document.getElementById("srch").value
+      }
+      srchsRef.push(obj)
+      location.href = "webs.html";
+  }})
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
