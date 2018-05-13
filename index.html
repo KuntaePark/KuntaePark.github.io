@@ -1,71 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Test Prototype</title>
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-	<link href="./Mainpage.css" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans" rel="stylesheet" />
-  </head>
+<head>
+	<title>mainpage</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+	<link rel="stylesheet" href="./mainpage-new.css">
+  <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+  <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Pacifico">
+</head>
 <body>
-<!-- Sidebar -->
-
-<div id="Sidebar">
-    <button id="SdClose" onclick="CloseSidebar()">&times; Don't show this again</button>
-    <div id="SidebarTitle">Items Recently Changed To Haram</div>
-    <div href="#" class="Category">
-		<div class="SBitemName">Cookie 쿠키</div>
-		<div class="SBitemImg" name="SBitem1"></div>
+	<!--
+	<div id="sideBar">
+		<div id="closeButton">Don't show this again</div>
+		<div id="sideBarContent">
+			<div id="sideBarTitle">Recently Changed To Haram</div>
+			<div id="sideBarList">
+				
+			</div>
+		</div>
+	</div>
+-->
+	<div id="main-container" class="ui container">
+		<div class="ui top fixed borderless menu" id="menu">
+      <div class="item" id="space">
+      </div>
+      <div class="item">
+        <!-- <img style="height: 50px; width: 60px;" src="logo.png"> -->
+        <span id="logo">K-Halal</span>
+      </div>
+      <div class="item" id="srchbar">
+        <div class="ui search">
+          <div class="ui icon input">
+            <input id="srch" class="prompt" type="text" placeholder="Search item by name...">
+            <i class="keyboard icon"></i>
+          </div>
+        </div>
     </div>
-    <div href="#" class="Category"></div>
-    <div href="#" class="Category"></div>
-</div>
-<div id="title">
-	<div href="#" id="HomeIcon"></div>
-	<div id="SearchBar">
-		<span class="Icon"><i class="fa fa-search"></i></span>
-		<input type="text" placeholder="Search item by name..." id="search"/>
-		<button type="kbrd" class="kbrd"><i class="fa fa-keyboard-o fa-2x" aria-hidden="true"></i> </button>
-
+        <a class="item" style="font-size:17px">
+          <i class="unhide icon"></i>
+          Can't find item?
+      </a>
+    </div>
+		<div id="catMenu" class="ui container">
+			<div id="catMenuTitle" class="ui large header">...Or Search Easily By Looking Through Category!</div>
+			<div id="curCatWrap">
+				<div id="curCategory"></div>
+				<div id="backButton"><i class="fa fa-angle-left"></i></div>
+			</div>
+			<div id="catMenuItemGrid" class = "ui five column stackable centered grid container">
+			</div>
+		</div>
 	</div>
-</div>
-<div id="SearchCategory">
-	<h2 id="CMtitle">Search your item by category</h2>
-	<div href="#" id="CategoryMenu">
-		<div class="CatItem" id="item1">
-			<div class="ItemName">Cookie</div>
-			<div class="Hsign"></div>
-		</div>
-		<div class="CatItem" id="item2">
-			<div class="ItemName">Milk</div>
-			<div class="Hsign"></div>
-		</div>
-		<div class="CatItem" id="item3">
-			<div class="ItemName">Chocolate</div>
-			<div class="Hsign"></div>
-		</div>
-		<div class="CatItem" id="item4"></div>
-		<div class="CatItem" id="item5"></div>
-		<div class="CatItem" id="item6"></div>
-		<div class="CatItem" id="item7"></div>
-		<div class="CatItem" id="item8"></div>
-		<div class="CatItem" id="item9"></div>
-		<div class="CatItem" id="item10"></div>
-		<div class="CatItem" id="item11"></div>
-		<div class="CatItem" id="item12"></div>
-		<div class="CatItem" id="item13"></div>
-		<div class="CatItem" id="item14"></div>
 
+	<div id="footing">
+		<h1>Footing Here</h1>
 	</div>
-</div>
-<div id="Info">
-</div>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://css-tricks.com/examples/HorzScrolling/jquery.mousewheel.js"></script>
-    <script src="./Mainpage.js"></script>
-  </body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+	<script src="./mainpage-new.js"></script>
+</body>
 </html>
-<script>
-
-</script>
