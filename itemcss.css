@@ -35,6 +35,11 @@
 	margin-left: 200px;
 }
 
+#headers{
+  font-size: 30px;
+  color: rgba(0,0,0,0.85)
+}
+
 #commentbtn {
 	background-color: #99cd32;
 }
@@ -60,4 +65,13 @@
 
 #srch{
 	width: 500px;
+}
+
+#cmntsection {
+  margin-top: 20px;
+}
+
+#commentWrap{
+  height: 200px;
+  overflow-y: scroll;
 }

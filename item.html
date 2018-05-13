@@ -50,7 +50,7 @@
 	<div class="tbldiv">
   <table class="ui olive table" id="table">
 	  <thead>
-	    <tr class="fixed"><th>Ingredients</th>
+	    <tr class="fixed"><th id="headers">Ingredients</th>
 	    <th></th>
 	  </tr>
 	</thead>
@@ -59,8 +59,10 @@
 	</table>
 </div>
 
-<div class="ui comments">
-  <div class="comment">
+<div class="ui comments" id="cmntsection">
+  <h3 id="headers">Comments</h3>
+  <div id="commentWrap"></div> 
+<!--   <div class="comment">
     <a class="avatar">
       <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
     </a>
@@ -75,7 +77,7 @@
         <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
       </div>
     </div>
-  </div>
+  </div> -->
   <form class="ui reply form">
     <div class="field">
       <textarea style="height: 50px"></textarea>
