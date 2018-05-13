@@ -4,16 +4,15 @@
 
 .leftview{
   float: left; 
-  width: 240px;
 }
 
 .rightview{
-  margin-left: 243px;
+  margin-left: 300px;
   width: 600px;
 }
 
 .tbldiv{
-  height: 487px;
+  height: 461px;
   overflow-y: scroll;
 }
 
@@ -31,33 +30,9 @@
     }
 
 .lowermenu{
-	margin-top: 75px;
 	margin-left: 200px;
 }
 
 #commentbtn {
 	background-color: #99cd32;
-}
-
-#space {
-	width: 200px;
-}
-
-#menu{
-	background-color: #99cd32;
-}
-
-#logo{
-	font-family: 'Pacifico', Sans-Serif;
-	font-size: 40px;
-	/*font-weight: bold;*/
-	color:white;
-}
-
-#srchbar{
-	margin-left: 40px;
-}
-
-#srch{
-	width: 500px;
 }

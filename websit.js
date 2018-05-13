@@ -27,33 +27,32 @@ $( document ).ready(function() {
 document.getElementById("srch").addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
-    $('#results > span').nextAll('div').remove();
     npt = document.getElementById("srch").value;
-    $(".ui-menu-item").hide();
     itemsRef.once("value", function(items) {
             items.forEach(function(item){
-              if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-                if (item.val().status == "Halal") {
-                  var result = "<div class='item' style='width:873px;'><div class='image'>"+
+              if (item.val().engname.includes(npt)) {
+                if (item.val().status == "Haram") {
+                  var result = "<div class='item' ><div class='image'>"+
                 "<img src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
-                "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
-                "<div id='circle' class='ui huge right floated label' style='background-color: #99cd32; color: rgba(0,0,0,0.85); font-size:26px;'>Halal</div></div></div>"
+                "<a class='header' style='margin-top: 35px'>" + item.val().engname + "<br>" + item.val().korname + "</a>"+
+                "<div id='circle' class='ui huge right floated label' style='background-color: #ff5233; color: rgba(0,0,0,0.85);'>Haram</div></div></div>"
+                // "<a class='ui red circular huge right floated label'>Haram</a>< "
                 $(result).insertAfter(".fxd");
-                console.log("Should appear first")
                 }
               }
             })
           });
     itemsRef.once("value", function(items) {
             items.forEach(function(item){
-              if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
+              if (item.val().engname.includes(npt)) {
                 if (item.val().status == "Suspicious") {
-                  var result = "<div class='item' style='width:873px;'><div class='image'>"+
+                  var result = "<div class='item' ><div class='image'>"+
                 "<img src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
-                "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
-                "<div id='circle' class='ui huge right floated label' style='background-color: rgba(255,224,51,0.85); color: rgba(0,0,0,0.85); font-size:26px;'>Suspicious</div></div></div>"
+                "<a class='header' style='margin-top: 35px'>" + item.val().engname + "<br>" + item.val().korname + "</a>"+
+                // "<div><b>Suspicious</b></div>
+                "<div id='circle' class='ui huge right floated label' style='background-color: rgba(255,224,51,0.85); color: rgba(0,0,0,0.85);'>Suspicious</div></div></div>"
                 // "<a class='ui red circular huge right floated label'>Haram</a>< " #ffe033
                 $(result).insertAfter(".fxd");
                 }
@@ -62,30 +61,21 @@ document.getElementById("srch").addEventListener("keyup", function(event) {
           });
     itemsRef.once("value", function(items) {
             items.forEach(function(item){
-              if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-                if (item.val().status == "Haram") {
-                  var result = "<div class='item' style='width: 873px;'><div class='image'>"+
+              if (item.val().engname.includes(npt)) {
+                if (item.val().status == "Halal") {
+                  var result = "<div class='item' ><div class='image'>"+
                 "<img src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
-                "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
-                "<div id='circle' class='ui huge right floated label' style='background-color: #ff5233; color: rgba(0,0,0,0.85); font-size:26px;'>Haram</div></div></div>"
+                "<a class='header' style='margin-top: 35px'>" + item.val().engname + "<br>" + item.val().korname + "</a>"+
+                "<div id='circle' class='ui huge right floated label' style='background-color: #99cd32; color: rgba(0,0,0,0.85);'>Haram</div></div></div>"
                 // "<a class='ui red circular huge right floated label'>Haram</a>< "
                 $(result).insertAfter(".fxd");
-                console.log("Should appear last")
                 }
               }
             })
           });
   }
 })
-
-function clickfunc(obj){
-  var obj = {
-        ans : $(obj).text().split("  ")[0]
-      }
-      selectionsRef.push(obj)
-      location.href = "item.html";
-}
 
 function generatelst() {
   itemsRef.once("value", function(items) {

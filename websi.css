@@ -1,7 +1,5 @@
 #results{
-	width: 900px;
-	margin-top: 100px;
-	margin-left: 217px;
+	width: 500px;
 }
 
 #circle {
@@ -17,28 +15,3 @@
       align-items: center;
 
     }
-
-/*upper menu*/
-
-#space {
-	width: 200px;
-}
-
-#menu{
-	background-color: #99cd32;
-}
-
-#logo{
-	font-family: 'Pacifico', Sans-Serif;
-	font-size: 40px;
-	/*font-weight: bold;*/
-	color:white;
-}
-
-#srchbar{
-	margin-left: 40px;
-}
-
-#srch{
-	width: 500px;
-}
