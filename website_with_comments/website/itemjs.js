@@ -30,6 +30,7 @@ function getname() {
 	            selections.forEach(function(selection){
 	              name = selection.val().ans
                 selectionsRef.remove()
+                
                 itemRef.orderByChild("engname").equalTo(name).once('value',function(snapshot) {
                   itemKey = Object.keys(snapshot.val())[0]
                   console.log(itemKey)
