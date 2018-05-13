@@ -10,6 +10,30 @@ var srchsRef = database.ref('srchs');
 var categoryObject = null;
 var currentCatItem = null;
 var catHistory = [];
+var lst = []
+
+$( document ).ready(function() {
+    generatelst()
+      $('#srch').autocomplete({
+        minCharacters : 2,
+        source: lst,
+        select: function (e, ui) {
+          var obj = {
+            ans : ui.item.label
+          }
+          selectionsRef.push(obj)
+          location.href = "item.html";
+          return false
+      }
+  })})
+
+function generatelst() {
+  itemsRef.once("value", function(items) {
+            items.forEach(function(item){
+              lst.push(item.val().engname)
+            });
+          });
+}
 
 categoryRef.once('value',function(snapshot) {
   categoryObject = snapshot.val()
