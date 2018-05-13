@@ -54,7 +54,7 @@ $("#srch").keyup(function(event) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
                 if (item.val().status == "Halal") {
-                  var result = "<div class='item' style='width:873px;'><div class='image'>"+
+                  var result = "<div class='item' style='width:873px;height:175px;'><div class='image'>"+
                 "<img src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
@@ -68,7 +68,7 @@ $("#srch").keyup(function(event) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
                 if (item.val().status == "Suspicious") {
-                  var result = "<div class='item' style='width:873px;'><div class='image'>"+
+                  var result = "<div class='item' style='width:873px;height:175px;'><div class='image'>"+
                 "<img src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
@@ -83,7 +83,7 @@ $("#srch").keyup(function(event) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
                 if (item.val().status == "Haram") {
-                  var result = "<div class='item' style='width: 873px;'><div class='image'>"+
+                  var result = "<div class='item' style='width: 873px;height:175px;'><div class='image'>"+
                 "<img src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
