@@ -15,8 +15,8 @@ var commentsRef = database.ref('comments');
 var itemCommentsRef = null;
 var itemKey;
 
-var curUserName = "John"
-var curUserCntry = "Indonesia"
+var curUserName = null
+var curUserCntry = null
 var curDate //temporary measure
 
 
@@ -188,6 +188,53 @@ $('#commentbtn').on("click",function (e) {
 
 $('#message').on("click",function() {
   if(curUserName == null) {
+    $('#message').prop('disabled',true)
     //connect to log in functionality
+  $('.ui.login.modal')
+    .modal('show')
+  ;
+
+  $('.ui.login.form')
+    .form({
+      fields: {
+       
+        username: {
+          identifier: 'username',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a username'
+            }
+          ]
+        },
+        password: {
+          identifier: 'password',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a password'
+          
+            }
+          ]
+        },
+      }
+    });
+
+  $('.ui.red.login.cancel.basic.button').click(function(){
+  console.log('click');
+  $('.ui.login.modal.form').modal('hide'); 
+  });
+                                               
+   
+  $('.ui.green.login.submit.basic.button').click(function(){
+    console.log('click');
+    if( $('.ui.login.form').form('is valid')) {
+      console.log('valid');
+      $('.ui.login.modal').modal('hide');
+      curUserName = $('input[name="username"]').val()
+      console.log(curUserName)
+    }
+  });
   }
+  $('#message').prop('disabled',false)
 }); 

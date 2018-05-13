@@ -8,6 +8,7 @@ var database = firebase.database();
 var categoryRef = database.ref('categories');
 var itemsRef = database.ref('items');
 var srchsRef = database.ref('srchs');
+var selectionsRef = database.ref('selections');
 var categoryObject = null;
 var currentCatItem = null;
 var catHistory = [];
@@ -58,6 +59,13 @@ document.getElementById("srch").addEventListener("keyup", function(event) {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+function clickfunc(obj){
+  var obj = {
+        ans : obj
+      }
+      selectionsRef.push(obj)
+      location.href = "item.html";
+}
 
 function renderCategories(Categories) {
   var htmls;
@@ -89,6 +97,8 @@ function renderCategories(Categories) {
     console.log(categoryObject[this.id]['key'])
     if(categoryObject[this.id]['key'] != null) {
       console.log("not an object.");
+      console.log(this.id)
+      clickfunc(this.id)
     } else {
       catHistory.push([currentCatItem, categoryObject]);
       currentCatItem = this.id
