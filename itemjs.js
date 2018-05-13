@@ -6,16 +6,17 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var itemsRef = database.ref('items');
 var selectionsRef = database.ref('selections');
+var srchsRef = database.ref('srchs');
 var table = document.getElementById("table")
 var name = ""
+var lst = []
 
-var itemRef = database.ref('items');
 var commentsRef = database.ref('comments');
 var itemCommentsRef = null;
 var itemKey;
 
-var curUserName = "John"
-var curUserCntry = "Indonesia"
+var curUserName = null
+var curUserCntry = null
 var curDate //temporary measure
 
 
@@ -23,30 +24,48 @@ var curDate //temporary measure
 $( document ).ready(function() {
 	getname()
 	fillpage()
+  generatelst()
+  $('#srch').autocomplete({
+    minCharacters : 2,
+    source: lst,
+    select: function (e, ui) {
+      var obj = {
+        ans : ui.item.label
+      }
+      selectionsRef.push(obj)
+      location.href = "item.html";
+      return false
+  }
+  })
+  
 })
+
+document.getElementById("srch").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      var obj = {
+        ans : document.getElementById("srch").value
+      }
+      srchsRef.push(obj)
+      location.href = "webs.html";
+  }})
+
 
 function getname() {
 	selectionsRef.once("value", function(selections) {
 	            selections.forEach(function(selection){
 	              name = selection.val().ans
                 selectionsRef.remove()
-                
-                itemRef.orderByChild("engname").equalTo(name).once('value',function(snapshot) {
+                itemsRef.orderByChild("engname").equalTo(name).once('value',function(snapshot) {
                   itemKey = Object.keys(snapshot.val())[0]
-                  console.log(itemKey)
                   itemCommentsRef = commentsRef.child(itemKey)
                   itemCommentsRef.on('value', function (snapshot) {
-                    console.log("Updated")
                     var commentsObject = snapshot.val()
-                    console.log(commentsObject)
                     renderComments(commentsObject)
                   })
-                })
-
+               })
 	            });
 	          });
-
-
 }
 
 function fillpage() {
@@ -88,6 +107,14 @@ function fillpage() {
                 }
               }
             })
+          });
+}
+
+function generatelst() {
+  itemsRef.once("value", function(items) {
+            items.forEach(function(item){
+              lst.push(item.val().engname)
+            });
           });
 }
 
@@ -155,15 +182,59 @@ $('#commentbtn').on("click",function (e) {
 
   today = mm + '/' + dd + '/' + yyyy;
   curDate = today
-  console.log(curUserName,curUserCntry,curDate,message)
   addMessage(curUserName,curUserCntry,curDate,message)
   return false
 })
 
 $('#message').on("click",function() {
-  console.log("clicked")
   if(curUserName == null) {
-    console.log("not logged in")
+    $('#message').prop('disabled',true)
     //connect to log in functionality
+  $('.ui.login.modal')
+    .modal('show')
+  ;
+
+  $('.ui.login.form')
+    .form({
+      fields: {
+       
+        username: {
+          identifier: 'username',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a username'
+            }
+          ]
+        },
+        password: {
+          identifier: 'password',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a password'
+          
+            }
+          ]
+        },
+      }
+    });
+
+  $('.ui.red.login.cancel.basic.button').click(function(){
+  console.log('click');
+  $('.ui.login.modal.form').modal('hide'); 
+  });
+                                               
+   
+  $('.ui.green.login.submit.basic.button').click(function(){
+    console.log('click');
+    if( $('.ui.login.form').form('is valid')) {
+      console.log('valid');
+      $('.ui.login.modal').modal('hide');
+      curUserName = $('input[name="username"]').val()
+      console.log(curUserName)
+    }
+  });
   }
-});
+  $('#message').prop('disabled',false)
+}); 

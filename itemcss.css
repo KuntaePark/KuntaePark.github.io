@@ -4,15 +4,16 @@
 
 .leftview{
   float: left; 
+  width: 240px;
 }
 
 .rightview{
-  margin-left: 300px;
+  margin-left: 243px;
   width: 600px;
 }
 
 .tbldiv{
-  height: 461px;
+  height: 487px;
   overflow-y: scroll;
 }
 
@@ -30,9 +31,47 @@
     }
 
 .lowermenu{
+	margin-top: 75px;
 	margin-left: 200px;
+}
+
+#headers{
+  font-size: 30px;
+  color: rgba(0,0,0,0.85)
 }
 
 #commentbtn {
 	background-color: #99cd32;
+}
+
+#space {
+	width: 200px;
+}
+
+#menu{
+	background-color: #99cd32;
+}
+
+#logo{
+	font-family: 'Pacifico', Sans-Serif;
+	font-size: 40px;
+	/*font-weight: bold;*/
+	color:white;
+}
+
+#srchbar{
+	margin-left: 40px;
+}
+
+#srch{
+	width: 500px;
+}
+
+#cmntsection {
+  margin-top: 20px;
+}
+
+#commentWrap{
+  height: 200px;
+  overflow-y: scroll;
 }
