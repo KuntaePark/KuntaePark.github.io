@@ -6,6 +6,7 @@ databaseURL: "https://prototype-a5084.firebaseio.com",
 firebase.initializeApp(config);
 var database = firebase.database();
 var categoryRef = database.ref('categories');
+var itemsRef = database.ref('items');
 var srchsRef = database.ref('srchs');
 var categoryObject = null;
 var currentCatItem = null;
