@@ -72,7 +72,7 @@ $("#srch").keyup(function(event) {
                 "<img src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
-                "<div id='circle' class='ui huge right floated label' style='background-color: rgba(255,224,51,0.85); color: rgba(0,0,0,0.85); font-size:26px;'>Suspicious</div></div></div>"
+                "<div id='circle' class='ui huge right floated label' style='background-color: rgba(255,224,51,0.85); color: rgba(0,0,0,0.85); font-size:20px;'>Suspicious</div></div></div>"
                 // "<a class='ui red circular huge right floated label'>Haram</a>< " #ffe033
                 $(result).insertAfter(".fxd");
                 }
