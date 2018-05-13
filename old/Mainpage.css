@@ -1,0 +1,215 @@
+
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent;
+}
+
+body {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 110vh;
+	font-family: 'Merriweather', serif;
+}
+
+#title {
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	width: 100%;
+	height:40vh;
+}
+
+#SearchBar {
+	position: relative;
+	vertical-align: middle;
+	display: inline-block;
+	height: 100px;
+	width: 450px;	
+
+}
+
+.Icon {
+	position: absolute;
+	margin-top: 41px;
+	margin-left: 20px;
+	z-index: 2;
+	color: #4f5b66;
+}
+
+#SearchBar input[type=text] {
+	position: absolute;
+	float: left;
+	margin-top: 34px;
+	margin-left: 10px;
+    height: 20px;
+    padding: 6px;
+    font-size: 17px;
+	padding-left: 45px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 450px;
+}
+
+.kbrd {
+	position: absolute;
+	border: none;
+	text-align: center;
+	background-color: transparent;
+	padding: 0;
+	width: 32px;
+	height: 32px;
+	margin-top: 35px;
+	margin-left: 476px;
+	z-index: 3;
+	color: #4f5b66;
+}
+
+#HomeIcon {
+	background: url("https://lh3.googleusercontent.com/ZHOE7IYRRAVhgGSSTewwipuKGRWyeBmIeB4OAQAe6f6xrRcxtbAFUHPMX1l7a0wDM4E=w300") 100% 100% no-repeat;
+	background-size: contain;
+	width: 100px;
+	height: 100px;
+	border: none;
+}
+
+#SearchCategory {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height:701px;
+	bottom: 10vh;
+}
+
+#CategoryMenu {
+	display: grid;
+	grid-template-rows: 320px 320px;
+	grid-template-columns: repeat(7, 320px);
+	grid-column-gap: 10px;
+	margin: 0;
+	width: 100%;
+	height: 640px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	z-index: 1;
+}
+
+#CMtitle {
+	display: block;
+	padding-left: 20px;
+	margin: 15px 0;
+	
+}
+
+
+.CatItem {
+	position: relative;
+	margin: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ;
+	background-color: #87cefa;
+	border-radius: 15px;
+}
+
+
+
+.ItemName {
+	position: absolute;
+	border: 3px solid black;
+	padding: 3px;
+	margin: 10px;
+	font-size: 20px;
+	background: white;
+}
+
+.Hsign {
+	position:absolute;
+	bottom: 0;
+	right: 0;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	background: gray;
+	width: 50px;
+	height: 50px;
+}
+
+#item1 {
+	background: url("./image/cookie.jpg") no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+#item2 {
+	background: url("./image/milk.jpg") no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+#item3 {
+	background: url("./image/choco.jpg") no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+#Info {
+	position: absolute;
+	display: block;
+	bottom: 0;
+	text-align: center;
+	display: block;
+	width: 100%;
+	height: 10vh;
+	background-color:#808080;
+
+}
+
+#SidebarTitle {
+	text-align:Center;
+	padding: 5px 0;
+	font-size: 20px;
+	font-weight: bold;
+	border-width: 0 0 5px 0;
+	border-style: solid;
+	border-color: black;
+	
+}
+#SdClose {
+	font-family: 'Merriweather', serif;
+	background-color: #87cefa;
+	border: none;
+	width: 200px;
+	height: 30px;
+	font-size: 15px;
+	color: white;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+#Sidebar {
+	background-color: white;
+	position:fixed;
+	right: 0;
+	display: block;
+	margin: 0;
+	width: 200px;
+	height: 100%;
+	z-index: 99;
+}
+
+.SBitemName {
+	padding: 5px;
+	text-align: center;
+}
+.Category {
+	margin: 5px 0;
+	width: 200px;
+	height: 230px;
+}
+/*
+#SBitem1 {
+	background: url("./cookie.jpg");
+	background-size: ;
+}
+*/
