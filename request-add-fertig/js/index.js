@@ -1,20 +1,20 @@
-$('.menu .item')
+$('.reqad .item')
   .tab()
 ;
 
-$('.ui.reqad.modal')
+$('#reqAdModal')
   .modal('show')
 ;
 
   $('.coupled.modal')
   .modal({
-    allowMultiple: false
+    allowMultiple: true
   })
 ;
 
     
 // requesterror
-$('.ui.req.form.segment')
+$('#reqForm')
   .form({
     fields: {
      reqname: {
@@ -37,16 +37,16 @@ $('.ui.req.form.segment')
       },
     }
   });
-$('.ui.red.req.cancel.basic.button').click(function(){
+$('#reqCancel').click(function(){
 console.log('click');
-$('.ui.reqad.modal').modal('hide'); 
+$('#reqAdModal').modal('hide'); 
 })
 
- $('.ui.green.req.submit.basic.button').click(function(){
+ $('#reqSend').click(function(){
  console.log('click');
- if( $('.ui.req.form.segment').form('is valid')) {
+ if( $('#reqForm').form('is valid')) {
  console.log('valid');
-$('.ui.reqadf.modal').modal('show'); 
+$('reqAdfModal').modal('show'); 
  
   }
      });
