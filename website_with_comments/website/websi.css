@@ -1,0 +1,17 @@
+#results{
+	width: 500px;
+}
+
+#circle {
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+      border-radius: 50px;
+      background: #FF4500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
