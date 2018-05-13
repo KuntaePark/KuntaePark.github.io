@@ -41,7 +41,7 @@
 		  </h3></div>
 		  <div id="circle" class="ui huge label" style="font-size: 26px; color: rgba(0,0,0,0.85); margin-top:15px;">Status</div>
     </div>
-    <div class="ui bottom attached button">
+    <div id="btn" class="ui bottom attached button">
       Report a mistake
     </div>
   </div>
@@ -90,6 +90,42 @@
 
 </div>
 </div>
+
+
+                         
+      <div class="ui report container">
+      <div class="ui report modal form segment">
+        <i class ="report close icon"></i>
+        <p> Make a report.</p>
+
+  
+  
+  <div class="field">
+    <label>Please tell us, which information of this item is wrong:</label>
+    <input placeholder="Wrong Information" type="text" name="reportinput">
+  </div>
+     
+ <div class = "ui red report cancel basic button">Cancel</div>
+ <div class = "ui green report submit basic button">Send</div>         
+ <div class="ui report error message"></div>
+    
+    
+     <div class = "ui refe container">  <!--refe = report feedback -->
+        <div class = "ui refe modal">
+          <i class ="refe close icon"></i>
+           <div class = "refe header">
+          We received your report.
+        </div>
+          <div class = "ui refe content">
+            <p> Thank you very much for helping us improving our website. As soon as we worked on your report, we will correct the mistake. </p>
+          
+          
+            <div class = "ui green refe approve basic button">Great!</div>
+         </div>
+          </div>   
+    </div>
+
+
   	<script src="jquery/js/jquery-1.9.0.min.js"></script>
     <script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
