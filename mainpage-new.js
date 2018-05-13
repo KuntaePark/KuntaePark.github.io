@@ -14,7 +14,9 @@ var lst = []
 
 $( document ).ready(function() {
     generatelst()
+    console.log(lst)
       $('#srch').autocomplete({
+        
         minCharacters : 2,
         source: lst,
         select: function (e, ui) {
