@@ -9,41 +9,61 @@ var categoryRef = database.ref('categories');
 var itemsRef = database.ref('items');
 var srchsRef = database.ref('srchs');
 var selectionsRef = database.ref('selections');
+var recentChangeRef = database.ref('changes');
 var categoryObject = null;
 var currentCatItem = null;
+var allItemObject = null;
 var catHistory = [];
 var lst = []
 
-$( document ).ready(function() {
-    generatelst()
-    console.log(lst)
-      $('#srch').autocomplete({
-        
-        minCharacters : 2,
-        source: lst,
-        select: function (e, ui) {
-          var obj = {
-            ans : ui.item.label
-          }
-          selectionsRef.push(obj)
-          location.href = "item.html";
-          return false
-      }
-  })})
 
+generatelst()
+console.log(lst)
+  $('#srch').autocomplete({
+    
+    minCharacters : 2,
+    source: lst,
+    select: function (e, ui) {
+      var obj = {
+        ans : ui.item.label
+      }
+      selectionsRef.push(obj)
+      location.href = "item.html";
+      return false
+  }
+})
+  
 function generatelst() {
   itemsRef.once("value", function(items) {
+            allItemObject = items.val()
+            console.log(allItemObject)
             items.forEach(function(item){
               lst.push(item.val().engname)
             });
           });
 }
 
+recentChangeRef.once('value',function(snapshot) {
+  var htmls;
+  htmls = Object.values(snapshot.val()).map(function (itemKey) {
+    return `
+      <div class="column"><div class="sideBarItem" id="${itemKey}"
+      style="background: url(${allItemObject[itemKey]['pic']}) no-repeat;
+      background-size: cover;
+      background-position: center center;">
+        <div class="sideBarItemName">${capitalizeFirstLetter(allItemObject[itemKey]['engname'])}</div>
+      </div></div>        
+     `
+    })
+  $("#sideBarList").html(htmls)
+})
+
 categoryRef.once('value',function(snapshot) {
   categoryObject = snapshot.val()
   console.log(categoryObject)
   renderCategories(categoryObject)
 })
+
 
 document.getElementById("srch").addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -80,12 +100,27 @@ function renderCategories(Categories) {
     if(category == 'pic') {
       return ''
     } else {
+      var halalMark = ''
+      var curKeyData = Categories[category]['key']
+      console.log(curKeyData)
+      if(curKeyData != null) {
+        var temp = allItemObject[curKeyData]["status"]
+        console.log(temp)
+        if(temp == "Halal") {
+          halalMark = '<div class="Mark halalMark"><i class="fas fa-check"></i></div>'
+        }else if(temp == "Suspicious") {
+          halalMark = '<div class="Mark SuspMark"><i class="fas fa-question"></i></div>'
+        }else if(temp == "Haram") {
+          halalMark = '<div class="Mark haramMark"><i class="fas fa-exclamation"></i></div>'
+        }
+      }
     return `
       <div class="column"><div class="catElements" id="${category}"
       style="background: url(${Categories[category]['pic']}) no-repeat;
       background-size: cover;
       background-position: center center;">
         <div class="catName">${capitalizeFirstLetter(category)}</div>
+        ${halalMark}
       </div></div>        
      `
     }
@@ -109,6 +144,14 @@ function renderCategories(Categories) {
     }
   })
 
+$('.sideBarItem').click(function(e){
+  e.preventDefault()
+  console.log("clicked")
+  clickfunc(allItemObject[this.id]["engname"])
+})
+
+
+
   $('#backButton').click(function(e) {
     console.log("clicked")
     e.preventDefault()
@@ -121,3 +164,7 @@ function renderCategories(Categories) {
   })
 }
 
+$('#closeButton').click(function(e){
+   e.preventDefault()
+   $('#sideBar').css("display","none")
+})
