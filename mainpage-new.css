@@ -30,17 +30,17 @@
 	opacity: 1.0;
 }
 #sideBarTitleWrap {
-	padding-bottom: 10px;
 	border-bottom: 3px solid #cecece;
 }
 #sideBarTitle {
+	height: 66px;
 	text-align: center;
 	vertical-align: center;
-	margin: 10px 5px 5px 5px;
-	padding: 10px;
-	border-radius: 3px;
+	padding-top: 14px;
+	margin: 0;
 	font-size: 20px;
 	font-weight: bold;
+	color: rgba(0,0,0,0.85);
 	background-color: #99cd32;	
 }
 

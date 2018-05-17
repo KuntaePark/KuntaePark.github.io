@@ -16,7 +16,14 @@ var allItemObject = null;
 var catHistory = [];
 var lst = []
 
-
+var today = new Date()
+var dd = today.getDate()
+console.log(dd)
+console.log(localStorage.getItem('closeDate'))
+if(localStorage.getItem('closeDate') == dd) {
+  console.log('here')
+  $('#sideBar').css("display","none")
+}
 generatelst()
 console.log(lst)
   $('#srch').autocomplete({
@@ -167,4 +174,8 @@ $('.sideBarItem').click(function(e){
 $('#closeButton').click(function(e){
    e.preventDefault()
    $('#sideBar').css("display","none")
+   var today = new Date()
+   var dd = today.getDate()
+   console.log(dd)
+   localStorage.setItem('closeDate',dd)
 })
