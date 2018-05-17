@@ -94,8 +94,7 @@ $("#srch").keyup(function(event) {
               }
             })
           });
-    var hdr = '<h3 id="headers">Search Results:</h3>'
-    $(hdr).insertAfter(".fxd");
+    
   }
 })
 
