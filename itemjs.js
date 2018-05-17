@@ -76,25 +76,55 @@ function fillpage() {
               	document.getElementById("imgid").src=item.val().pic
               	document.getElementById("engname").innerText = item.val().engname
               	document.getElementById("korname").innerText = item.val().korname
-              	for (var ingrnum in ingrs) { 
-                  if (ingrs[ingrnum].state != "0"){
-                		var row = table.insertRow(1);
-          					var cell1 = row.insertCell(0);
-          					var cell2 = row.insertCell(1);
-          					cell1.innerHTML = ingrs[ingrnum].engingr
-          					cell2.innerHTML = ingrs[ingrnum].koringr
-                  }
-              	}
-                for (var ingrnum in ingrs) { 
+              	// for (var ingrnum in ingrs) { 
+               //    if (ingrs[ingrnum].state != "0"){
+               //  		var row = table.insertRow(1);
+          					// var cell1 = row.insertCell(0);
+          					// var cell2 = row.insertCell(1);
+          					// cell1.innerHTML = ingrs[ingrnum].engingr
+          					// cell2.innerHTML = ingrs[ingrnum].koringr
+               //    }
+              	// }
+                var hal = []
+                var har = []
+                for (var ingrnum in ingrs) {
                   if (ingrs[ingrnum].state == "0"){
+                    har.push({eng:ingrs[ingrnum].engingr, kor:ingrs[ingrnum].koringr})
+                  } else {
+                    hal.push({eng:ingrs[ingrnum].engingr, kor:ingrs[ingrnum].koringr})
+                  }
+                }
+                hal.sort(function(a, b) {
+                   return a.eng.localeCompare(b.eng);
+                });
+                har.sort(function(a, b) {
+                   return a.eng.localeCompare(b.eng);
+                });
+                for (var i = hal.length - 1; i >= 0; --i) {
                   var row = table.insertRow(1);
                   var cell1 = row.insertCell(0);
                   var cell2 = row.insertCell(1);
-                  cell1.innerHTML = ingrs[ingrnum].engingr
-                  cell2.innerHTML = ingrs[ingrnum].koringr
-                  row.style.color = "#ff5233"
-                  } 
+                  cell1.innerHTML = hal[i].eng
+                  cell2.innerHTML = hal[i].kor
                 }
+                for (var i = har.length - 1; i >= 0; --i) {
+                  var row = table.insertRow(1);
+                  var cell1 = row.insertCell(0);
+                  var cell2 = row.insertCell(1);
+                  cell1.innerHTML = har[i].eng
+                  cell2.innerHTML = har[i].kor
+                  row.style.color = "#ff5233"
+                }
+                // for (var ingrnum in ingrs) { 
+                //   if (ingrs[ingrnum].state == "0"){
+                //   var row = table.insertRow(1);
+                //   var cell1 = row.insertCell(0);
+                //   var cell2 = row.insertCell(1);
+                //   cell1.innerHTML = ingrs[ingrnum].engingr
+                //   cell2.innerHTML = ingrs[ingrnum].koringr
+                //   row.style.color = "#ff5233"
+                //   } 
+                // }
               	if (item.val().status == "Haram") {
               		document.getElementById("circle").style.backgroundColor = "#ff5233"
               		document.getElementById("circle").innerText = "Haram"
