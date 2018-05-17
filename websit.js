@@ -156,7 +156,9 @@ function clickfunc(obj){
         ans : $(obj).text().split("  ")[0]
       }
       selectionsRef.push(obj)
-      location.href = "item.html";
+      // location.href = "item.html";
+        var win = window.open("item.html", '_blank');
+        win.focus();
 }
 
 function generatelst() {
