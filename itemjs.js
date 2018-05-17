@@ -98,12 +98,15 @@ function fillpage() {
               	if (item.val().status == "Haram") {
               		document.getElementById("circle").style.backgroundColor = "#ff5233"
               		document.getElementById("circle").innerText = "Haram"
+                  document.getElementById("circle").style.fontSize = "26px"
               	} else if (item.val().status == "Suspicious") {
                   document.getElementById("circle").style.backgroundColor = "rgba(255,224,51,0.85)"
                   document.getElementById("circle").innerText = "Suspicious"
+                  document.getElementById("circle").style.fontSize = "20px"
                 } else {
                   document.getElementById("circle").style.backgroundColor = "#99cd32"
                   document.getElementById("circle").innerText = "Halal"
+                  document.getElementById("circle").style.fontSize = "26px"
                 }
               }
             })

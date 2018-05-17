@@ -54,8 +54,8 @@ $("#srch").keyup(function(event) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
                 if (item.val().status == "Halal") {
-                  var result = "<div class='item' style='width:873px;height:175px;'><div class='image'>"+
-                "<img src='" + item.val().pic + "'></div>"+
+                  var result = "<div class='item' style='width:873px;height:175px;border-bottom: 2px #cccccc solid;'><div class='image' style='height:160px;'>"+
+                "<img style='height: 100%;' src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
                 "<div id='circle' class='ui huge right floated label' style='background-color: #99cd32; color: rgba(0,0,0,0.85); font-size:26px;'>Halal</div></div></div>"
@@ -68,8 +68,8 @@ $("#srch").keyup(function(event) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
                 if (item.val().status == "Suspicious") {
-                  var result = "<div class='item' style='width:873px;height:175px;'><div class='image'>"+
-                "<img src='" + item.val().pic + "'></div>"+
+                  var result = "<div class='item' style='width:873px;height:175px;border-bottom: 2px #cccccc solid;'><div class='image' style='height:160px;'>"+
+                "<img style='height: 100%;' src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
                 "<div id='circle' class='ui huge right floated label' style='background-color: rgba(255,224,51,0.85); color: rgba(0,0,0,0.85); font-size:20px;'>Suspicious</div></div></div>"
@@ -83,8 +83,8 @@ $("#srch").keyup(function(event) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
                 if (item.val().status == "Haram") {
-                  var result = "<div class='item' style='width: 873px;height:175px;'><div class='image'>"+
-                "<img src='" + item.val().pic + "'></div>"+
+                  var result = "<div class='item' style='width: 873px;height:175px;border-bottom: 2px #cccccc solid;'><div class='image' style='height:160px;'>"+
+                "<img style='height: 100%;' src='" + item.val().pic + "'></div>"+
                 "<div class='middle aligned content' style='align-items: center;'>"+
                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
                 "<div id='circle' class='ui huge right floated label' style='background-color: #ff5233; color: rgba(0,0,0,0.85); font-size:26px;'>Haram</div></div></div>"
