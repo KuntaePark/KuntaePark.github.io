@@ -179,3 +179,24 @@ $('#closeButton').click(function(e){
    console.log(dd)
    localStorage.setItem('closeDate',dd)
 })
+
+
+document.getElementById("notfound").onclick = function(){
+  $('.ui.reqad.modal')
+  .modal('show')
+;
+}
+
+$('.menu .item')
+  .tab()
+;
+
+$('.coupled.modal')
+  .modal({
+    allowMultiple: false
+  })
+;
+
+$('.ui.reqadf.modal')
+  .modal('attach events', '.ui.reqad.modal .ui.green.reqad.approve.basic.button')
+;
