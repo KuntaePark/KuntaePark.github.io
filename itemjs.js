@@ -170,8 +170,10 @@ function addMessage(usrname, cntry, date, message) {
 function renderComments(comments) {
   var htmls;
   if(comments == null) {
-    htmls = null;
+    htmls = '<div style="font-size: 20px; color: #cccccc">No comments yet. Be the first one.</div>'
+     $(htmls).insertAfter("#ff");
   } else {
+    document.getElementById('commentWrap').style.height = "200px";
     htmls = Object.values(comments).map(function (comment) {
       return `
       <div class="comment">
@@ -192,8 +194,9 @@ function renderComments(comments) {
 
     `
     })
+    $('#commentWrap').html(htmls)
   }
-  $('#commentWrap').html(htmls)
+  
 }
 
 $('#commentbtn').on("click",function (e) {
