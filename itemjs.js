@@ -202,7 +202,7 @@ function renderComments(comments) {
 $('#commentbtn').on("click",function (e) {
   e.preventDefault()
   var message = $('.field textarea').val()
-
+  document.getElementById('message').value = ""
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
