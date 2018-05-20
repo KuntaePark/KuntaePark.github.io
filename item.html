@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Item Overview Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Pacifico">
@@ -14,21 +15,22 @@
     <div class="ui top fixed borderless menu" id="menu">
       <div class="item" id="space">
       </div>
-      <div class="item">
+      <a class="item">
         <!-- <img style="height: 50px; width: 60px;" src="logo.png"> -->
-        <span id="logo">K-Halal</span>
-      </div>
+        <span id="logo" onclick="window.location = 'index.html'">K-Halal</span>
+      </a>
       <div class="item" id="srchbar">
         <div class="ui search">
           <div class="ui icon input">
             <input id="srch" class="prompt" type="text" placeholder="Search item by name...">
-            <i class="keyboard icon"></i>
+            <i class="search icon"></i>
           </div>
         </div>
     </div>
     </div>
 
     <div class="lowermenu">
+      <h3 id="headers">Item overview:</h3>
   	<div class = "leftview">
   <div class="ui card">
   	<div class="image">
@@ -39,9 +41,10 @@
 		  </h3></div>
   		<div class="header"><h3 id="korname" class="ui center aligned header" style="font-size: 30px; color: rgba(0,0,0,0.85);">
 		  </h3></div>
-		  <div id="circle" class="ui huge label" style="font-size: 26px; color: rgba(0,0,0,0.85); margin-top:15px;">Status</div>
+		  <div id="circle" class="ui huge label" style=" color: rgba(0,0,0,0.85); margin-top:15px;">Status</div>
     </div>
-    <div id="btn" class="ui bottom attached button">
+    <div id="btn" class="ui bottom attached big button">
+      <i class="attention icon"></i>
       Report a mistake
     </div>
   </div>
@@ -61,7 +64,7 @@
 
 <div class="ui comments" id="cmntsection">
   <h3 id="headers">Comments</h3>
-  <div id="commentWrap"></div> 
+  <div id="commentWrap"><span id="ff"></span></div> 
 <!--   <div class="comment">
     <a class="avatar">
       <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
@@ -112,12 +115,12 @@
 <div class="ui report container">
       <div class="ui report modal form segment">
         <i class ="report close icon"></i>
-        <p> Make a report.</p>
+        <!-- <p> Report a mistake </p> -->
 
   
   
   <div class="field">
-    <label>Please tell us, which information of this item is wrong:</label>
+    <label>Please tell us, which information on this item is wrong:</label>
     <input placeholder="Wrong Information" type="text" name="reportinput">
   </div>
      
@@ -133,10 +136,10 @@
           We received your report.
         </div>
           <div class = "ui refe content">
-            <p> Thank you very much for helping us improving our website. As soon as we worked on your report, we will correct the mistake. </p>
+            <p> Thank you for helping us to improve our website. As soon as we process your report, we will correct the mistake. </p>
           
           
-            <div class = "ui green refe approve basic button">Great!</div>
+            <div class = "ui green refe approve basic button">OK</div>
          </div>
           </div>   
     </div>

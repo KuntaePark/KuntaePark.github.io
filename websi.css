@@ -1,3 +1,8 @@
+#headers{
+  font-size: 35px;
+  color: rgba(0,0,0,0.85)
+}
+
 #results{
 	width: 900px;
 	margin-top: 75px;

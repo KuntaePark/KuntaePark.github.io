@@ -76,34 +76,67 @@ function fillpage() {
               	document.getElementById("imgid").src=item.val().pic
               	document.getElementById("engname").innerText = item.val().engname
               	document.getElementById("korname").innerText = item.val().korname
-              	for (var ingrnum in ingrs) { 
-                  if (ingrs[ingrnum].state != "0"){
-                		var row = table.insertRow(1);
-          					var cell1 = row.insertCell(0);
-          					var cell2 = row.insertCell(1);
-          					cell1.innerHTML = ingrs[ingrnum].engingr
-          					cell2.innerHTML = ingrs[ingrnum].koringr
-                  }
-              	}
-                for (var ingrnum in ingrs) { 
+              	// for (var ingrnum in ingrs) { 
+               //    if (ingrs[ingrnum].state != "0"){
+               //  		var row = table.insertRow(1);
+          					// var cell1 = row.insertCell(0);
+          					// var cell2 = row.insertCell(1);
+          					// cell1.innerHTML = ingrs[ingrnum].engingr
+          					// cell2.innerHTML = ingrs[ingrnum].koringr
+               //    }
+              	// }
+                var hal = []
+                var har = []
+                for (var ingrnum in ingrs) {
                   if (ingrs[ingrnum].state == "0"){
+                    har.push({eng:ingrs[ingrnum].engingr, kor:ingrs[ingrnum].koringr})
+                  } else {
+                    hal.push({eng:ingrs[ingrnum].engingr, kor:ingrs[ingrnum].koringr})
+                  }
+                }
+                hal.sort(function(a, b) {
+                   return a.eng.localeCompare(b.eng);
+                });
+                har.sort(function(a, b) {
+                   return a.eng.localeCompare(b.eng);
+                });
+                for (var i = hal.length - 1; i >= 0; --i) {
                   var row = table.insertRow(1);
                   var cell1 = row.insertCell(0);
                   var cell2 = row.insertCell(1);
-                  cell1.innerHTML = ingrs[ingrnum].engingr
-                  cell2.innerHTML = ingrs[ingrnum].koringr
-                  row.style.color = "#ff5233"
-                  } 
+                  cell1.innerHTML = hal[i].eng
+                  cell2.innerHTML = hal[i].kor
                 }
+                for (var i = har.length - 1; i >= 0; --i) {
+                  var row = table.insertRow(1);
+                  var cell1 = row.insertCell(0);
+                  var cell2 = row.insertCell(1);
+                  cell1.innerHTML = har[i].eng
+                  cell2.innerHTML = har[i].kor
+                  row.style.color = "#ff5233"
+                }
+                // for (var ingrnum in ingrs) { 
+                //   if (ingrs[ingrnum].state == "0"){
+                //   var row = table.insertRow(1);
+                //   var cell1 = row.insertCell(0);
+                //   var cell2 = row.insertCell(1);
+                //   cell1.innerHTML = ingrs[ingrnum].engingr
+                //   cell2.innerHTML = ingrs[ingrnum].koringr
+                //   row.style.color = "#ff5233"
+                //   } 
+                // }
               	if (item.val().status == "Haram") {
               		document.getElementById("circle").style.backgroundColor = "#ff5233"
               		document.getElementById("circle").innerText = "Haram"
+                  document.getElementById("circle").style.fontSize = "26px"
               	} else if (item.val().status == "Suspicious") {
                   document.getElementById("circle").style.backgroundColor = "rgba(255,224,51,0.85)"
                   document.getElementById("circle").innerText = "Suspicious"
+                  document.getElementById("circle").style.fontSize = "20px"
                 } else {
                   document.getElementById("circle").style.backgroundColor = "#99cd32"
                   document.getElementById("circle").innerText = "Halal"
+                  document.getElementById("circle").style.fontSize = "26px"
                 }
               }
             })
@@ -137,8 +170,10 @@ function addMessage(usrname, cntry, date, message) {
 function renderComments(comments) {
   var htmls;
   if(comments == null) {
-    htmls = null;
+    htmls = '<div style="font-size: 20px; color: #cccccc">No comments yet. Be the first one.</div>'
+     $(htmls).insertAfter("#ff");
   } else {
+    document.getElementById('commentWrap').style.height = "200px";
     htmls = Object.values(comments).map(function (comment) {
       return `
       <div class="comment">
@@ -159,14 +194,15 @@ function renderComments(comments) {
 
     `
     })
+    $('#commentWrap').html(htmls)
   }
-  $('#commentWrap').html(htmls)
+  
 }
 
 $('#commentbtn').on("click",function (e) {
   e.preventDefault()
   var message = $('.field textarea').val()
-
+  document.getElementById('message').value = ""
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!

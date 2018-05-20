@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Search Results Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Pacifico">
@@ -13,26 +14,101 @@
     <div class="ui top fixed borderless menu" id="menu">
       <div class="item" id="space">
       </div>
-      <div class="item">
+      <a class="item">
         <!-- <img style="height: 50px; width: 60px;" src="logo.png"> -->
-        <span id="logo">K-Halal</span>
-      </div>
+        <span id="logo" onclick="window.location = 'index.html'">K-Halal</span>
+      </a>
       <div class="item" id="srchbar">
         <div class="ui search">
           <div class="ui icon input">
             <input id="srch" class="prompt" type="text" placeholder="Search item by name...">
-            <i class="keyboard icon"></i>
+            <i class="search icon"></i>
           </div>
         </div>
     </div>
-        <a class="item" style="font-size:17px">
+        <a class="item" id="notfound" style="font-size:17px">
           <i class="unhide icon"></i>
           Can't find item?
       </a>
     </div>
   <div class="ui items" id="results">
+    <h3 id="headers">Search Results:</h3>
     <span class="fxd"> </span>
   </div>
+
+
+
+  <div class="ui reqad modal">                     
+       <i class ="close reqad icon"></i>   
+       <div class="ui reqad tabular menu">               
+       <a class="item req active" data-tab="tab-name">Request</a>
+       <a class="item ad" data-tab="tab-name2">Add</a>
+       </div>
+                <!-- Request Tab with Content  -->
+              <div class="ui tab req active" data-tab="tab-name">         
+              <form class="ui req form segment"> 
+                  <div class="req two fields">
+                    <div class="reqr field">
+                  <label>Please insert name of item </label>
+                  <input placeholder="Item name: chic choc" type="text">
+                    </div>
+                    <div class="reqr field">
+                  <label>Please insert brand of item </label>
+                  <input placeholder ="Brand name: Lotte" type="text">
+                    </div>
+                   </div> 
+              </form>
+              </div>
+                 <!-- Add Tab with Content  -->
+              <div class="ui tab ad" data-tab="tab-name2">                
+              <form class="ui ad form segment"> 
+                <div class="ad two fields">
+                  <div class="ad field">
+                  <label>Please insert name of item </label>
+                  <input placeholder="Item name: chic choc" type="text">
+                  </div>
+                    <div class="ad field">
+                    <label>Please insert brand of item </label>
+                    <input placeholder ="Brand name: Lotte" type="text">
+                    </div>
+                </div>     <!-- Add tab with status buttons  -->
+                         <div class="inline ads fields">                     
+                          <label>What status does the item have?</label>
+                          <div class="ads field">
+                              <div class="ui ads master checkbox">
+                              <input type="radio" name="frequency" checked="checked">
+                              <label>Halal</label>
+                              </div>
+                          </div>
+                          <div class="ads field">
+                              <div class="ui ads master checkbox">
+                              <input type="radio" name="frequency">
+                              <label>Haram</label>
+                              </div>
+                          </div>
+                         </div> 
+               </div>
+      <!-- Approve and Cancel button for both tabs  -->
+     <div class = "reqad actions ">
+       <div class = "ui red reqad cancel basic button">Cancel</div>
+       <div class = "ui green reqad approve basic button">Send</div>
+    </div>  
+ </div><!--add and request box closed  -->
+
+
+      <!-- Confirmation box for approve button   -->
+          <div class = "ui reqadf modal">
+          <i class ="reqadf close icon"></i>
+            <div class = "reqadf header">
+            We received your item-suggestion.
+            </div>
+                  <div class = "ui reqadf content">
+                  <p> We will let you know, when we add the item on our website.   </p>
+                  </div>
+            <div class = "reqadf actions ">
+            <div class = "ui green reqadf approve basic button">Great!</div>
+            </div>
+          </div>
   <script src="jquery/js/jquery-1.9.0.min.js"></script>
     <script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>

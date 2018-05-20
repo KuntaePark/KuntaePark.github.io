@@ -1,15 +1,21 @@
 #sideBar {
+	border-left: 1px solid rgba(34,36,38,.15);
+	box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+
 	width: 200px;
 	height: 100%;
-	position: absolute;
-	right:0;
+	position: fixed;
+	right: 0;
 	display:block;
-	margin: 0;
+	background-color: white;
 	z-index: 99!important;
 }
 
 #closeButton {
-	background-color: #87cefa;
+	background-color: #808080;
+	position: absolute;
+	opacity: 0.8;
+	bottom: 0;
 	border: none;
 	width: 200px;
 	height: 30px;
@@ -20,15 +26,57 @@
 	padding: 0;
 }
 
-#sidebarTitle {
-	text-align:Center;
-	padding: 5px 0;
+#closeButton:hover {
+	opacity: 1.0;
+	cursor: pointer;
+}
+#sideBarTitleWrap {
+}
+#sideBarTitle {
+	height: 67px;
+	text-align: center;
+	vertical-align: center;
+	padding-top: 14px;
+	margin: 0;
 	font-size: 20px;
 	font-weight: bold;
-	border-width: 0 0 5px 0;
+	color: rgba(0,0,0,0.85);
+	background-color: #99cd32;	
+}
+
+.sideBarItem {
+	position: relative;
+	background-color: #b8f416;
+	margin: 10px;
+	border-radius: 5%;
 	border-style: solid;
-	border-color: black;
-	
+	border-color: #65ae07;
+	border-width: 5px;
+	width: 180px;
+	height: 0;
+	padding-bottom: 170px;
+	opacity: 0.7;
+	overflow: hidden;
+
+}
+
+.sideBarItem:hover {
+	opacity: 1.0;
+}
+
+.sideBarItemName {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	margin: 0;
+	background-color: rgba(255,255,255,1);
+/*	padding-bottom: 10px; */
+	padding-left: 5px;
+	font-size: 30px;
+	color: #65ae07;
+	line-height: 1.5;
+	font-weight: bold;	
 }
 
 #main-container {
@@ -67,6 +115,9 @@
 	color:#65ae07;
 	font-size: 40px;
 	font-weight: bold;
+	text-align: center;
+	vertical-align: center;
+	line-height: 100%;
 }
 #backButton {
 	font-size: 30px;
@@ -74,8 +125,11 @@
 	opacity: 0.7;
 	width: 40px;
 	height: 40px;
+	border-radius: 20px;
+	background-color: #808080;
 	text-align: center;
 	vertical-align: center;
+	line-height: 40px;
 	display: none;
 }
 
@@ -123,7 +177,31 @@
 	font-weight: bold;
 }
 
+.Mark {
+	position: absolute;
+	text-align: center;
+	vertical-align: center;
+	line-height:80px;
+	font-size: 40px;
+	right: 10px;
+	bottom: 10px;
+	margin: 0;
+	width: 80px;
+	height: 80px;
+	border-radius: 50px;
+	box-shadow: 1px 1px rgba(128,128,128,0.5);
+}
+.halalMark {
+	background-color: #99cd32;
+}
 
+.haramMark {
+	background-color: #ff5523;
+}
+
+.SuspMark {
+	background-color: #ffe551;
+}
 #footing {
 	width: 100vw;
 	height: 10vh;
