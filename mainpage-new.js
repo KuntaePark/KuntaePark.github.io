@@ -103,9 +103,44 @@ function renderCategories(Categories) {
     $('#curCategory').html(capitalizeFirstLetter(currentCatItem))
     $('#backButton').css("display","block")
   }
-  htmls = Object.keys(Categories).map(function (category) {
+  // //-----------------------
+  // htmls = Object.keys(Categories).map(function (category) {
+  //   if(category == 'pic') {
+  //     return ''
+  //   } else {
+  //     var halalMark = ''
+  //     var curKeyData = Categories[category]['key']
+  //     console.log(curKeyData)
+  //     if(curKeyData != null) {
+  //       var temp = allItemObject[curKeyData]["status"]
+  //       console.log(temp)
+  //       if(temp == "Halal") {
+  //         halalMark = '<div class="Mark halalMark"><i class="fas fa-check"></i></div>'
+  //       }else if(temp == "Suspicious") {
+  //         halalMark = '<div class="Mark SuspMark"><i class="fas fa-question"></i></div>'
+  //       }else if(temp == "Haram") {
+  //         halalMark = '<div class="Mark haramMark"><i class="fas fa-exclamation"></i></div>'
+  //       }
+  //     }
+  //   return `
+  //     <div class="column"><div class="catElements" id="${category}"
+  //     style="background: url(${Categories[category]['pic']}) no-repeat;
+  //     background-size: cover;
+  //     background-position: center center;">
+  //       <div class="catName">${capitalizeFirstLetter(category)}</div>
+  //       ${halalMark}
+  //     </div></div>        
+  //    `
+  //   }
+  // })
+  //------------------------
+  var halals = []
+  var susps = []
+  var harams = []
+  Object.keys(Categories).forEach(function(category) {
+    console.log(category)
     if(category == 'pic') {
-      return ''
+    return
     } else {
       var halalMark = ''
       var curKeyData = Categories[category]['key']
@@ -115,13 +150,7 @@ function renderCategories(Categories) {
         console.log(temp)
         if(temp == "Halal") {
           halalMark = '<div class="Mark halalMark"><i class="fas fa-check"></i></div>'
-        }else if(temp == "Suspicious") {
-          halalMark = '<div class="Mark SuspMark"><i class="fas fa-question"></i></div>'
-        }else if(temp == "Haram") {
-          halalMark = '<div class="Mark haramMark"><i class="fas fa-exclamation"></i></div>'
-        }
-      }
-    return `
+          halals.push(`
       <div class="column"><div class="catElements" id="${category}"
       style="background: url(${Categories[category]['pic']}) no-repeat;
       background-size: cover;
@@ -129,9 +158,50 @@ function renderCategories(Categories) {
         <div class="catName">${capitalizeFirstLetter(category)}</div>
         ${halalMark}
       </div></div>        
-     `
+     `)
+          return
+        }else if(temp == "Suspicious") {
+          halalMark = '<div class="Mark SuspMark"><i class="fas fa-question"></i></div>'
+          susps.push(`
+      <div class="column"><div class="catElements" id="${category}"
+      style="background: url(${Categories[category]['pic']}) no-repeat;
+      background-size: cover;
+      background-position: center center;">
+        <div class="catName">${capitalizeFirstLetter(category)}</div>
+        ${halalMark}
+      </div></div>        
+     `)
+          return
+        }else if(temp == "Haram") {
+          halalMark = '<div class="Mark haramMark"><i class="fas fa-exclamation"></i></div>'
+          harams.push(`
+      <div class="column"><div class="catElements" id="${category}"
+      style="background: url(${Categories[category]['pic']}) no-repeat;
+      background-size: cover;
+      background-position: center center;">
+        <div class="catName">${capitalizeFirstLetter(category)}</div>
+        ${halalMark}
+      </div></div>        
+     `)
+          return
+        }
+      } else {
+      halals.push(`
+      <div class="column"><div class="catElements" id="${category}"
+      style="background: url(${Categories[category]['pic']}) no-repeat;
+      background-size: cover;
+      background-position: center center;">
+        <div class="catName">${capitalizeFirstLetter(category)}</div>
+        ${halalMark}
+      </div></div>        
+     `)
+      return
+      }
     }
   })
+  console.log(halals)
+  htmls = halals.join('') + susps.join('') + harams.join('')
+  console.log(htmls)
   $('#catMenuItemGrid').html(htmls)
   $('.catElements').click(function(e){
     e.preventDefault()

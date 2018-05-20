@@ -28,11 +28,12 @@
 
 #closeButton:hover {
 	opacity: 1.0;
+	cursor: pointer;
 }
 #sideBarTitleWrap {
 }
 #sideBarTitle {
-	height: 66px;
+	height: 67px;
 	text-align: center;
 	vertical-align: center;
 	padding-top: 14px;
