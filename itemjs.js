@@ -7,6 +7,7 @@ var database = firebase.database();
 var itemsRef = database.ref('items');
 var selectionsRef = database.ref('selections');
 var srchsRef = database.ref('srchs');
+var authRef = database.ref('userInfo');
 var table = document.getElementById("table")
 var name = ""
 var lst = []
@@ -15,10 +16,12 @@ var commentsRef = database.ref('comments');
 var itemCommentsRef = null;
 var itemKey;
 
-var curUserName = null
-var curUserCntry = null
-var curDate //temporary measure
-
+var curUserInfo = null
+var curDate
+var userInfos
+authRef.once('value',function(snapshot) {
+  userInfos = snapshot.val()
+})
 
 
 $( document ).ready(function() {
@@ -157,10 +160,9 @@ function generatelst() {
 // Bind comments to firebase
 
 
-function addMessage(usrname, cntry, date, message) {
+function addMessage(usrinfo, date, message) {
   var messageObject = {
-    usrname: usrname,
-    cntry: cntry,
+    usrinfo: usrinfo,
     date: date,
     message: message,
   }
@@ -181,9 +183,9 @@ function renderComments(comments) {
           <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
         </a>
         <div class="content">
-          <a class="author">${comment.usrname}</a>
+          <a class="author">${comment.usrinfo.usrname}</a>
           <div class="metadata">
-            <div>${comment.cntry}</div>
+            <div>${comment.usrinfo.cntry}</div>
             <div class="date">${comment.date}</div>
           </div>
           <div class="text">
@@ -218,12 +220,12 @@ $('#commentbtn').on("click",function (e) {
 
   today = mm + '/' + dd + '/' + yyyy;
   curDate = today
-  addMessage(curUserName,curUserCntry,curDate,message)
+  addMessage(curUserInfo,curDate,message)
   return false
 })
 
 $('#message').on("click",function() {
-  if(curUserName == null) {
+  if(curUserInfo == null) {
     $('#message').prop('disabled',true)
     //connect to log in functionality
   $('.ui.login.modal')
@@ -266,9 +268,36 @@ $('#message').on("click",function() {
     console.log('click');
     if( $('.ui.login.form').form('is valid')) {
       console.log('valid');
-      $('.ui.login.modal').modal('hide');
-      curUserName = $('input[name="username"]').val()
-      console.log(curUserName)
+      //login validation
+      var usrId = $('input[name="username"]').val()
+      var usrPswd = $('input[name="password"]').val()
+      var existId = false
+      var matchPswd = false
+      Object.keys(userInfos).forEach(function(element) {
+        console.log(element)
+        if(userInfos[element]["usrname"] == usrId) {
+          existId = true
+          if(userInfos[element]["password"] == usrPswd) {
+            curUserInfo = userInfos[element]
+            matchPswd = true
+            return
+          } else {
+            return
+          }
+        }
+      })
+      if(existId) {
+        if(matchPswd) {
+          $('.ui.login.modal').modal('hide');
+          return          
+        } else {
+          alert("Wrong password! Try again.")
+          return
+        }
+      } else {
+          alert("Id does not exist! Try again.")
+          return
+      }
     }
   });
   }
@@ -402,11 +431,20 @@ $('.ui.sigin.modal.form').modal('hide');
 }),
                                              
  
- $('.ui.green.sigin.submit.basic.button').click(function(){
- console.log('click');
- if( $('.ui.sigin.form').form('is valid')) {
- console.log('valid');
- $('.ui.sigin.modal').modal('hide'); 
-  
+$('.ui.green.sigin.submit.basic.button').click(function(){
+  console.log('click');
+  if( $('.ui.sigin.form').form('is valid')) {
+    console.log('valid');
+    //save usrinfo in database
+    var userObject = {
+      usrname: $('input[name="susername"]').val(),
+      password: $('input[name="spassword"]').val(),
+      email: $('input[name="smailadress"]').val(),
+      cntry: $('input[name="scountry"]').val(),
+      madh: $('input[name="smadhhab"]').val()
+    }
+    authRef.push(userObject)
+    curUserInfo = userObject
+    $('.ui.sigin.modal').modal('hide');
   }
-     });
+});
