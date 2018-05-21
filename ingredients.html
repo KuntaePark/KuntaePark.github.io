@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>List of ingredients</title>
+  <link rel="stylesheet" href="ingredients.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+  <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+  </head>
+  <body>
+  <div class="ui container">
+  <div class="ui top fixed borderless menu" id="menu">
+    <div class="item" id="space">
+    </div>
+    <div class="item">
+      <!-- <img style="height: 50px; width: 60px;" src="logo.png"> -->
+      <span id="logo" onclick="window.location = 'index.html'">K-Halal</span>
+    </div>
+    <div class="item" id="srchbar">
+      <div class="ui search">
+        <div class="ui icon input">
+          <input id="srch" class="prompt" type="text" onkeyup="myFunction()"placeholder="Search item by name...">
+          <i class="search icon"></i>
+        </div>
+      </div>
+  </div>
+  </div>
+<!--   <div class="ui list icon input">
+    <button type="ui listofti submit">icon for mainpage</button>   
+    <input type="text" id="ui list input" onkeyup="myFunction()" placeholder="Please insert the Korean name of the ingredient">
+    <i class="search icon"></i> </input> </div>
+    <button type="submit">keyboard icon</button> 
+    </div>
+ -->
+  <div class="results"></div>
+</div>
+  <div class="ui listofti search">
+  </div>
+  <center id="tableCenter">
+  <h2 id="tableheading">List of translated ingredients</h2>
+  <div id="tableWrap">
+  <table id="myTable" class= "ui large striped table">
+    <thead>
+    <tr>
+      <th> Korean Name</th>
+      <th>English Name</th>
+    </tr>
+  </thead>
+    <tbody></tbody>
+<!--   <tr>
+    <td>돼지 고기</td>
+    <td>Pork</td>
+  </tr>
+  <tr>
+    <td>치킨</td>
+    <td>Chicken</td>
+  </tr>
+  <tr>
+    <td>소고기</td>
+    <td>Beef</td>
+  </tr>
+  <tr>
+    <td>양고기</td>
+    <td>Lamb</td>
+  </tr>
+  <tr>
+    <td>젤라틴</td>
+    <td>Gelatine</td>
+  </tr>
+  <tr>
+    <td>과당</td>
+    <td>Fructose</td>
+  </tr>
+  <tr>
+    <td>산화 방지제</td>
+    <td>Antioxidants</td>
+  </tr>
+  <tr>
+    <td>감미료</td>
+    <td>Sweetener</td>
+  </tr>
+ --></table>
+  </div>
+</center>
+  <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+  <script  src="ingredients.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+</body>
+</html>

@@ -273,6 +273,10 @@ $('#message').on("click",function() {
       var usrPswd = $('input[name="password"]').val()
       var existId = false
       var matchPswd = false
+      if(userInfos == null) {
+        alert("Id does not exist! Try again.")
+        return
+      }
       Object.keys(userInfos).forEach(function(element) {
         console.log(element)
         if(userInfos[element]["usrname"] == usrId) {
