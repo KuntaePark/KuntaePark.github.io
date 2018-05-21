@@ -186,6 +186,7 @@ function renderComments(comments) {
           <a class="author">${comment.usrinfo.usrname}</a>
           <div class="metadata">
             <div>${comment.usrinfo.cntry}</div>
+            <div>${comment.usrinfo.madh}</div>
             <div class="date">${comment.date}</div>
           </div>
           <div class="text">
