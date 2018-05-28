@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>mainpage</title>
+	<title>Welcome to K-Halal</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
 	<link rel="stylesheet" href="./mainpage-new.css">
 	<link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet" />
@@ -25,10 +25,10 @@
 		<div class="ui top fixed borderless menu" id="menu">
       <div class="item" id="space">
       </div>
-      <div class="item">
+      <a class="item">
         <!-- <img style="height: 50px; width: 60px;" src="logo.png"> -->
         <span id="logo" onclick="window.location = 'index.html'">K-Halal</span>
-      </div>
+      </a>
       <div class="item" id="srchbar">
         <div class="ui search">
           <div class="ui icon input">
@@ -37,10 +37,11 @@
           </div>
         </div>
     </div>
-        <a class="item" id="notfound" style="font-size:17px">
+        <a class="item" id="notfound" style="font-size:19px; color: white;">
           <i class="unhide icon"></i>
           Can't find item?
       </a>
+    <a class="item" id="listLink" href="ingredients.html" style="color: white; font-size:19px;"><i class="language icon"></i>Translated ingredients</a>
     </div>
 		<div id="catMenu" class="ui container">
 			<div id="catMenuTitle" class="ui large header">...Or Search Easily By Looking Through Category!</div>

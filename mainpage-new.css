@@ -232,3 +232,9 @@
 #srch{
 	width: 500px;
 }
+
+#listLink {
+	width: 150px;
+	text-align: center;
+	font-size: 17px;
+}

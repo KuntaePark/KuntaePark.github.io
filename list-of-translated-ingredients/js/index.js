@@ -2,6 +2,7 @@ function myFunction() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("ui list input");
   filter = input.value.toUpperCase();
+  console.log(filter)
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {

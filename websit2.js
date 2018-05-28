@@ -52,6 +52,8 @@ $("#srch").keyup(function(event) {
     npt = document.getElementById("srch").value;
     $(".ui-menu-item").hide();
     var counter = 0
+    $.when(function(){
+      console.log("HELLO")
     itemsRef.once("value", function(items) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
@@ -102,12 +104,14 @@ $("#srch").keyup(function(event) {
               }
             })
           });
-      if (counter==0){
-        console.log("ZERO0")
+  }).done(function(){
+    console.log("HI")
+    if (counter==0){
         $('#results > span').nextAll('div').remove();
       result = '<div style="font-size:33px; color: rgba(0,0,0,.85);">No results found. Please, use "Can\'t find item?" button above.</div>'
       $(result).insertAfter(".fxd");
     }
+  })
   }
 })
 
