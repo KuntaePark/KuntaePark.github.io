@@ -22,13 +22,7 @@ $( document ).ready(function() {
             })})
      }
   });
-  // if (sessionStorage.getItem("itemname") != null){
-  //   document.getElementById("srch").value = sessionStorage.getItem("itemname")
-  //   e = jQuery.Event("keypress")
-  //   e.which = 13 //choose the one you want
-  //   $("#srch").keypress(function(){
-  //   }).trigger(e)
-  // }
+
   generatelst()
   $('#srch').autocomplete({
     minCharacters : 2,
@@ -51,12 +45,10 @@ $("#srch").keyup(function(event) {
     $('#results > span').nextAll('div').remove();
     npt = document.getElementById("srch").value;
     $(".ui-menu-item").hide();
-    var counter = 0
     itemsRef.once("value", function(items) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-                console.log("INC")
-                counter = counter + 1
+                if (document.contains(document.getElementById("fdb"))) {document.getElementById("fdb").remove();}
                 if (item.val().status == "Halal") {
                   var result = "<div class='item' style='width:873px;height:175px;border-bottom: 2px #cccccc solid;'><div class='image' style='height:160px;'>"+
                 "<img style='height: 100%;' src='" + item.val().pic + "'></div>"+
@@ -71,8 +63,7 @@ $("#srch").keyup(function(event) {
     itemsRef.once("value", function(items) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-                counter = counter + 1
-                console.log("INC")
+                if (document.contains(document.getElementById("fdb"))) {document.getElementById("fdb").remove();}
                 if (item.val().status == "Suspicious") {
                   var result = "<div class='item' style='width:873px;height:175px;border-bottom: 2px #cccccc solid;'><div class='image' style='height:160px;'>"+
                 "<img style='height: 100%;' src='" + item.val().pic + "'></div>"+
@@ -88,8 +79,7 @@ $("#srch").keyup(function(event) {
     itemsRef.once("value", function(items) {
             items.forEach(function(item){
               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-                counter = counter + 1
-                console.log("INC")
+                if (document.contains(document.getElementById("fdb"))) {document.getElementById("fdb").remove();}
                 if (item.val().status == "Haram") {
                   var result = "<div class='item' style='width: 873px;height:175px;border-bottom: 2px #cccccc solid;'><div class='image' style='height:160px;'>"+
                 "<img style='height: 100%;' src='" + item.val().pic + "'></div>"+
@@ -102,68 +92,11 @@ $("#srch").keyup(function(event) {
               }
             })
           });
-      if (counter==0){
-        console.log("ZERO0")
-        $('#results > span').nextAll('div').remove();
-      result = '<div style="font-size:33px; color: rgba(0,0,0,.85);">No results found. Please, use "Can\'t find item?" button above.</div>'
-      $(result).insertAfter(".fxd");
-    }
+      var result1 = '<div id="fdb" style="font-size:33px; color: rgba(0,0,0,.85);">No results found. Please, use "Can\'t find item?" button above.</div>'
+      $(result1).insertAfter(".fxd");
   }
 })
 
-// document.getElementById("srch").addEventListener("keyup", function(event) {
-//   event.preventDefault();
-//   if (event.keyCode === 13) {
-//     console.log("Hello")
-//     $('#results > span').nextAll('div').remove();
-//     npt = document.getElementById("srch").value;
-//     $(".ui-menu-item").hide();
-//     itemsRef.once("value", function(items) {
-//             items.forEach(function(item){
-//               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-//                 if (item.val().status == "Halal") {
-//                   var result = "<div class='item' style='width:873px;'><div class='image'>"+
-//                 "<img src='" + item.val().pic + "'></div>"+
-//                 "<div class='middle aligned content' style='align-items: center;'>"+
-//                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
-//                 "<div id='circle' class='ui huge right floated label' style='background-color: #99cd32; color: rgba(0,0,0,0.85); font-size:26px;'>Halal</div></div></div>"
-//                 $(result).insertAfter(".fxd");
-//                 }
-//               }
-//             })
-//           });
-//     itemsRef.once("value", function(items) {
-//             items.forEach(function(item){
-//               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-//                 if (item.val().status == "Suspicious") {
-//                   var result = "<div class='item' style='width:873px;'><div class='image'>"+
-//                 "<img src='" + item.val().pic + "'></div>"+
-//                 "<div class='middle aligned content' style='align-items: center;'>"+
-//                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
-//                 "<div id='circle' class='ui huge right floated label' style='background-color: rgba(255,224,51,0.85); color: rgba(0,0,0,0.85); font-size:26px;'>Suspicious</div></div></div>"
-//                 // "<a class='ui red circular huge right floated label'>Haram</a>< " #ffe033
-//                 $(result).insertAfter(".fxd");
-//                 }
-//               }
-//             })
-//           });
-//     itemsRef.once("value", function(items) {
-//             items.forEach(function(item){
-//               if (item.val().engname.toLowerCase().includes(npt.toLowerCase())) {
-//                 if (item.val().status == "Haram") {
-//                   var result = "<div class='item' style='width: 873px;'><div class='image'>"+
-//                 "<img src='" + item.val().pic + "'></div>"+
-//                 "<div class='middle aligned content' style='align-items: center;'>"+
-//                 "<a class='header' onclick='clickfunc(this)' style='margin-top: 25px; margin-left:30px; font-size:30px;'>" + item.val().engname + "  " + "<br><br>" + item.val().korname + "</a>"+
-//                 "<div id='circle' class='ui huge right floated label' style='background-color: #ff5233; color: rgba(0,0,0,0.85); font-size:26px;'>Haram</div></div></div>"
-//                 // "<a class='ui red circular huge right floated label'>Haram</a>< "
-//                 $(result).insertAfter(".fxd");
-//                 }
-//               }
-//             })
-//           });
-//   }
-// })
 
 function clickfunc(obj){
   var obj = {
