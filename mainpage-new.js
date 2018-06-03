@@ -10,22 +10,35 @@ var itemsRef = database.ref('items');
 var srchsRef = database.ref('srchs');
 var selectionsRef = database.ref('selections');
 var recentChangeRef = database.ref('changes');
+var authRef = database.ref('userInfo');
 var categoryObject = null;
 var currentCatItem = null;
 var allItemObject = null;
 var catHistory = [];
 var lst = []
 
+var curUserInfo = null;
+var curUserName = localStorage.getItem('curUserName')
+var userInfos
+authRef.once('value',function(snapshot) {
+  userInfos = snapshot.val()
+  if(curUserName != null) {
+    Object.keys(userInfos).forEach(function(item) {
+      if(curUserName == userInfos[item]['usrname']) {
+        curUserInfo = userInfos[item]
+      }
+    })
+  }
+  updateUsrState()
+});
+
+
 var today = new Date()
 var dd = today.getDate()
-console.log(dd)
-console.log(localStorage.getItem('closeDate'))
 if(localStorage.getItem('closeDate') == dd) {
-  console.log('here')
   $('#sideBar').css("display","none")
 }
 generatelst()
-console.log(lst)
   $('#srch').autocomplete({
     
     minCharacters : 2,
@@ -43,7 +56,6 @@ console.log(lst)
 function generatelst() {
   itemsRef.once("value", function(items) {
             allItemObject = items.val()
-            console.log(allItemObject)
             items.forEach(function(item){
               lst.push(item.val().engname)
             });
@@ -67,7 +79,6 @@ recentChangeRef.once('value',function(snapshot) {
 
 categoryRef.once('value',function(snapshot) {
   categoryObject = snapshot.val()
-  console.log(categoryObject)
   renderCategories(categoryObject)
 })
 
@@ -93,6 +104,39 @@ function clickfunc(obj){
       selectionsRef.push(obj)
       location.href = "item.html";
 }
+
+function updateUsrState() {
+  var htmls;
+  if(curUserInfo == null) {
+  htmls = `
+    Sign in
+  `
+  $('#loginState').html(htmls)
+  } else {
+  htmls = `
+    <div class="text">
+      <img class="ui avatar image" src="https://semantic-ui.com/images/avatar/small/joe.jpg">
+      ${curUserName}             
+    </div>
+    <i class="dropdown icon" style="color: white;"></i>
+    <div class="menu">
+      <div class="item">profile</div>
+      <div class="item" id="logout">logout</div>
+    </div>
+  `
+  $('#loginState').html(htmls)
+  $('#logout').on("click",function(e) {
+  e.stopPropagation()
+  curUserInfo = null
+  curUserName = null
+  localStorage.removeItem('curUserName')
+  updateUsrState()
+  })
+  }
+
+
+}
+
 
 function renderCategories(Categories) {
   var htmls;
@@ -138,16 +182,13 @@ function renderCategories(Categories) {
   var susps = []
   var harams = []
   Object.keys(Categories).forEach(function(category) {
-    console.log(category)
     if(category == 'pic') {
     return
     } else {
       var halalMark = ''
       var curKeyData = Categories[category]['key']
-      console.log(curKeyData)
       if(curKeyData != null) {
         var temp = allItemObject[curKeyData]["status"]
-        console.log(temp)
         if(temp == "Halal") {
           halalMark = '<div class="Mark halalMark"><i class="fas fa-check"></i></div>'
           halals.push(`
@@ -199,27 +240,103 @@ function renderCategories(Categories) {
       }
     }
   })
-  console.log(halals)
   htmls = halals.join('') + susps.join('') + harams.join('')
-  console.log(htmls)
   $('#catMenuItemGrid').html(htmls)
   $('.catElements').click(function(e){
     e.preventDefault()
-    console.log("clicked")
-    console.log(categoryObject[this.id]['key'])
     if(categoryObject[this.id]['key'] != null) {
-      console.log("not an object.");
-      console.log(this.id)
       clickfunc(this.id)
     } else {
       catHistory.push([currentCatItem, categoryObject]);
       currentCatItem = this.id
       categoryObject = categoryObject[this.id]
-      console.log(categoryObject)
       renderCategories(categoryObject)
 
     }
   })
+$('#loginState').on("click",function() {
+if(curUserInfo == null) {
+  $('.ui.login.modal')
+    .modal('show')
+  ;
+
+  $('.ui.login.form')
+    .form({
+      fields: {
+       
+        username: {
+          identifier: 'username',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a username'
+            }
+          ]
+        },
+        password: {
+          identifier: 'password',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a password'
+          
+            }
+          ]
+        },
+      }
+    });
+
+  $('.ui.red.login.cancel.basic.button').click(function(){
+  console.log('click');
+  $('.ui.login.modal.form').modal('hide'); 
+  });
+                                               
+   
+  $('.ui.green.login.submit.basic.button').click(function(){
+    console.log('click');
+    if( $('.ui.login.form').form('is valid')) {
+      console.log('valid');
+      //login validation
+      var usrId = $('input[name="username"]').val()
+      var usrPswd = $('input[name="password"]').val()
+      var existId = false
+      var matchPswd = false
+      if(userInfos == null) {
+        alert("Id does not exist! Try again.")
+        return
+      }
+      Object.keys(userInfos).forEach(function(element) {
+        console.log(element)
+        if(userInfos[element]["usrname"] == usrId) {
+          existId = true
+          if(userInfos[element]["password"] == usrPswd) {
+            curUserInfo = userInfos[element]
+            localStorage.setItem('curUserName',curUserInfo.usrname)
+            curUserName = curUserInfo.usrname
+            matchPswd = true
+            updateUsrState()
+            return
+          } else {
+            return
+          }
+        }
+      })
+      if(existId) {
+        if(matchPswd) {
+          $('.ui.login.modal').modal('hide');
+          return          
+        } else {
+          alert("Wrong password! Try again.")
+          return
+        }
+      } else {
+          alert("Id does not exist! Try again.")
+          return
+      }
+    }
+  });
+}
+})  
 
 $('.sideBarItem').click(function(e){
   e.preventDefault()
@@ -233,7 +350,6 @@ $('.sideBarItem').click(function(e){
     console.log("clicked")
     e.preventDefault()
     var temp = catHistory.pop()
-    console.log(temp)
     currentCatItem = temp[0]
     categoryObject = temp[1]
     renderCategories(categoryObject)
@@ -241,13 +357,15 @@ $('.sideBarItem').click(function(e){
   })
 }
 
-$('#closeButton').click(function(e){
-   e.preventDefault()
-   $('#sideBar').css("display","none")
-   var today = new Date()
-   var dd = today.getDate()
-   console.log(dd)
-   localStorage.setItem('closeDate',dd)
+$('#closeButton2').click(function(e){
+  e.preventDefault()
+  if($("#sideBarCheck").is(":checked")) {
+    var today = new Date()
+    var dd = today.getDate()
+    console.log(dd)
+    localStorage.setItem('closeDate',dd)
+  }
+  $('#sideBar').css("display","none")
 })
 
 

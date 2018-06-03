@@ -16,12 +16,23 @@ var commentsRef = database.ref('comments');
 var itemCommentsRef = null;
 var itemKey;
 
-var curUserInfo = null
-var curDate
+var curUserInfo = null;
+var curUserName = localStorage.getItem('curUserName')
 var userInfos
 authRef.once('value',function(snapshot) {
   userInfos = snapshot.val()
-})
+  if(curUserName != null) {
+    Object.keys(userInfos).forEach(function(item) {
+      if(curUserName == userInfos[item]['usrname']) {
+        curUserInfo = userInfos[item]
+      }
+    })
+  }
+  updateUsrState()
+});
+
+var curDate
+
 
 
 $( document ).ready(function() {
@@ -170,6 +181,12 @@ function addMessage(usrinfo, date, message) {
 }
 
 function renderComments(comments) {
+  console.log(curUserInfo)
+  if(curUserInfo != null) {
+  document.getElementById("commentbtn").className = document.getElementById("commentbtn").className.replace( /(?:^|\s)disabled(?!\S)/g , '' )
+  } else {
+  document.getElementById("commentbtn").className += " disabled"
+  }
   var htmls;
   if(comments == null) {
     htmls = '<div style="font-size: 20px; color: #cccccc">No comments yet. Be the first one.</div>'
@@ -202,8 +219,129 @@ function renderComments(comments) {
   
 }
 
+function updateUsrState() {
+  console.log("update start")
+  var htmls;
+  if(curUserInfo == null) {
+  htmls = `
+    Sign in
+  `
+  $('#loginState').html(htmls)
+  } else {
+  htmls = `
+    <div class="text">
+      <img class="ui avatar image" src="https://semantic-ui.com/images/avatar/small/joe.jpg">
+      ${curUserName}             
+    </div>
+    <i class="dropdown icon" style="color: white;"></i>
+    <div class="menu">
+      <div class="item">profile</div>
+      <div class="item" id="logout">logout</div>
+    </div>
+  `
+  $('#loginState').html(htmls)
+  $('#logout').on("click",function(e) {
+  e.stopPropagation()
+  curUserInfo = null
+  curUserName = null
+  localStorage.removeItem('curUserName')
+  document.getElementById("commentbtn").className += " disabled"
+  updateUsrState()
+  })
+  }
+
+
+}
+
+$('#loginState').on("click",function() {
+if(curUserInfo == null) {
+  console.log("aaa")
+  $('.ui.login.modal')
+    .modal('show')
+  ;
+
+  $('.ui.login.form')
+    .form({
+      fields: {
+       
+        username: {
+          identifier: 'username',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a username'
+            }
+          ]
+        },
+        password: {
+          identifier: 'password',
+          rules: [
+            {
+              type   : 'empty',
+              prompt : 'Please enter a password'
+          
+            }
+          ]
+        },
+      }
+    });
+
+  $('.ui.red.login.cancel.basic.button').click(function(){
+  console.log('click');
+  $('.ui.login.modal.form').modal('hide'); 
+  });
+                                               
+   
+  $('.ui.green.login.submit.basic.button').click(function(){
+    console.log('click');
+    if( $('.ui.login.form').form('is valid')) {
+      console.log('valid');
+      //login validation
+      var usrId = $('input[name="username"]').val()
+      var usrPswd = $('input[name="password"]').val()
+      var existId = false
+      var matchPswd = false
+      if(userInfos == null) {
+        alert("Id does not exist! Try again.")
+        return
+      }
+      Object.keys(userInfos).forEach(function(element) {
+        console.log(element)
+        if(userInfos[element]["usrname"] == usrId) {
+          existId = true
+          if(userInfos[element]["password"] == usrPswd) {
+            curUserInfo = userInfos[element]
+            localStorage.setItem('curUserName',curUserInfo.usrname)
+            curUserName = curUserInfo.usrname
+            matchPswd = true
+            document.getElementById("commentbtn").className = document.getElementById("commentbtn").className.replace( /(?:^|\s)disabled(?!\S)/g , '' )
+            updateUsrState()
+            return
+          } else {
+            return
+          }
+        }
+      })
+      if(existId) {
+        if(matchPswd) {
+          $('.ui.login.modal').modal('hide');
+          return          
+        } else {
+          alert("Wrong password! Try again.")
+          return
+        }
+      } else {
+          alert("Id does not exist! Try again.")
+          return
+      }
+    }
+  });
+}
+})  
+
 $('#commentbtn').on("click",function (e) {
   e.preventDefault()
+  console.log("click")
   var message = $('.field textarea').val()
   document.getElementById('message').value = ""
   var today = new Date();
@@ -225,9 +363,11 @@ $('#commentbtn').on("click",function (e) {
   return false
 })
 
+
+
 $('#message').on("click",function() {
   if(curUserInfo == null) {
-    $('#message').prop('disabled',true)
+  $('#message').prop('disabled',true)
     //connect to log in functionality
   $('.ui.login.modal')
     .modal('show')
@@ -284,7 +424,11 @@ $('#message').on("click",function() {
           existId = true
           if(userInfos[element]["password"] == usrPswd) {
             curUserInfo = userInfos[element]
+            localStorage.setItem('curUserInfo',curUserInfo.usrname)
+            curUserName = curUserInfo.usrname
             matchPswd = true
+            document.getElementById("commentbtn").className = document.getElementById("commentbtn").className.replace( /(?:^|\s)disabled(?!\S)/g , '' )
+            updateUsrState()
             return
           } else {
             return
@@ -450,6 +594,7 @@ $('.ui.green.sigin.submit.basic.button').click(function(){
     }
     authRef.push(userObject)
     curUserInfo = userObject
+    localStorage.setItem('curUserName',curUserInfo.usrname)
     $('.ui.sigin.modal').modal('hide');
   }
 });
