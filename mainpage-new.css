@@ -1,14 +1,14 @@
 #sideBar {
 	border-left: 1px solid rgba(34,36,38,.15);
 	box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-
+	padding-top: 73px;
 	width: 200px;
 	height: 100%;
 	position: fixed;
 	right: 0;
 	display:block;
 	background-color: white;
-	z-index: 99!important;
+	z-index: 98!important;
 }
 
 #closeButton2 {
@@ -58,7 +58,8 @@
 	font-size: 20px;
 	font-weight: bold;
 	color: rgba(0,0,0,0.85);
-	background-color: #99cd32;	
+	background-color: white;
+	border-bottom: 3px solid #eeeeee;	
 }
 
 .sideBarItem {
@@ -232,7 +233,7 @@
 
 #menu{
 	background-color: #99cd32;
-	z-index:98!important;
+	z-index:99!important;
 }
 
 #logo{
