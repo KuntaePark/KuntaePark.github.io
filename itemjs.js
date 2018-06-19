@@ -595,6 +595,8 @@ $('.ui.green.sigin.submit.basic.button').click(function(){
     authRef.push(userObject)
     curUserInfo = userObject
     localStorage.setItem('curUserName',curUserInfo.usrname)
+    curUserName = curUserInfo.usrname
+    updateUsrState();
     $('.ui.sigin.modal').modal('hide');
   }
 });
